@@ -1,0 +1,35 @@
+# coding: utf-8
+import os
+import sys
+import time
+t = time.time()
+#读取文件的代码
+def readlin(filepath):
+    wds = []
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            wds = f.readlines()
+    except Exception:
+        with open(filepath, 'r', encoding='gbk') as f:
+            wds = f.readlines()
+    return wds
+#查重代码
+def compare(file1, file2):
+    lines1 = readlin(file1)
+    lines2 = readlin(file2)
+
+    count = 0.
+    for line in lines1:
+        if lines2.count(line) > 0:
+            count += 1
+    return count / max(len(lines1), len(lines2))
+
+f1=input()
+f2=input()
+f3=input()
+degree = compare(f1, f2)
+ans = open(f3,'w',encoding='utf-8')# 覆盖添加答案文件
+ans.write(str("%.2f%%" % (degree * 100)))#先变成百分比，在变成str才能写入
+ans.close()#使用这种方式打开,要关闭文件
+print(time.time() - t)#测试运行时间
+print("{}和{}的相似度为：{:.2%}".format(f1.split(" ")[0], f2.split(" ")[0], degree))#测试答案，可忽略
