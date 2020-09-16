@@ -8,7 +8,6 @@ arg1=sys.argv[1]# 传的是命令行的第一个参数
 arg2=sys.argv[2]# 传的是命令行的第二个参数
 arg3=sys.argv[3]# 传的是命令行的第二个参数
 
-t = time.time()
 
 #读取文件代码
 def readlin(filepath):
