@@ -1,13 +1,7 @@
 # coding: utf-8
 import os
-import time
 import sys
-
-arg0=sys.argv[0]# 传的是执行的py文件名
-arg1=sys.argv[1]# 传的是命令行的第一个参数
-arg2=sys.argv[2]# 传的是命令行的第二个参数
-arg3=sys.argv[3]# 传的是命令行的第二个参数
-
+import time
 t = time.time()
 
 #读取文件代码
@@ -16,11 +10,9 @@ def readlin(filepath):
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             wds = f.readlines()
-            f.close()
     except Exception:
         with open(filepath, 'r', encoding='gbk') as f:
             wds = f.readlines()
-            f.close()
     return wds
 #查重代码
 def compare(file1, file2):
@@ -33,7 +25,13 @@ def compare(file1, file2):
             count += 1
     return count / max(len(lines1), len(lines2))
 
-degree = compare(arg1, arg2)
-ans = open(arg3,'w',encoding='utf-8')# 覆盖添加答案文件
+f1=input()
+f2=input()
+f3=input()
+degree = compare(f1, f2)
+ans = open(f3,'w',encoding='utf-8')# 覆盖添加答案文件
 ans.write(str("%.2f%%" % (degree * 100)))#先变成百分比，在变成str才能写入
 ans.close()#使用这种方式打开,要关闭文件
+print("{}和{}的相似度为：{:.2%}".format(f1.split(" ")[0], f2.split(" ")[0], degree))#测试答案，可忽略
+print(time.time() - t)#测试运行时间
+
